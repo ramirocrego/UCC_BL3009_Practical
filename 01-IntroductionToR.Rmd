@@ -1,46 +1,5 @@
 # An intro to the R programming language
 
-## What is R and why use R?
-
-**R** is a very powerful statistical programming language that is used broadly by researchers around the world.  **R** is an attractive programming language because it is free, open source, and platform independent.  With all the libraries that are available (and those that are in rapid development), it is quickly becoming a one-stop shop for all your analysis needs.  Most academic statisticians now use **R**, which has allowed for greater sharing of **R** code or packages to implement their recommended methods.  One of the very first things academics often ask when hiring someone is simply, "Can you describe your **R** or statistical programming experience?"  It is now critical to have this background to be competitive for scientific (and many other) positions. 
-
-Among the reasons to use **R** you have:  
-
-1. It's free – open source! If you are a teacher or a student, the benefits are obvious.
-2. It runs on a variety of platforms including Windows, Unix and MacOS.
-3. It provides an unparalleled platform for programming new statistical methods in an easy and straightforward manner.
-4. It contains advanced statistical routines not yet available in other software.
-5. New add-on “packages” are being created and updated constantly.
-6. It has state-of-the-art graphics capabilities.
-
-
-**R** does have a steep learning curve that can often be intimidating to new users, particularly those without prior coding experience.  While this can be very frustrating in the initial stages, learning **R** is like learning a language where proficiency requires practice and continual use of the program.
-
-Our advice is to push yourself to use this tool in everything you do.  At first, **R** will not be the easiest or quickest option.  With persistence, however, you will see the benefit of **R** and continue to find new ways to use it in your work.
-
-## R or RStudio? How to get them?
-
-**R** is available for Linux, MacOS X, and Windows (95 or later) platforms. Software can be downloaded from one of the [Comprehensive R Archive Network](https://cran.r-project.org/) (CRAN) mirror sites. Once installed, **R** will open a console where you run code. You can also work on a script file, where you can write and save your work, and other windows that will show up on demand such as the plot tab (Fig. 1). 
-
-![R console, script and plot tabs.](FIGURES/IntroToR_Fig1.png)
-
-***
-
-**RStudio** is an enterprise-ready professional software tool that integrates with **R**.  It has some nice features beyond the normal **R** interface, which many users feel it is easier to use than **R** (Fig. 2). Once you have installed **R**, you should also download and install [RStudio](https://www.rstudio.com/products/rstudio/download/).  For this course, we will work exclusively in *RStudio*.
-
-
-![RStudio sowfware](FIGURES/IntroToR_Fig2.png)
-
-***
-
-## Getting Help
-
-One of the most useful commands in **R** is `?`.  At the command prompt (signified by `>` in your Console window), type `?` followed by any command and you will be prompted with a help tab for that command (e.g., `?mean` Fig. 3). You can also search through the help tab directly by searching functions on the search bar. 
-
-![Getting help on R.](FIGURES/IntroToR_Fig3.png)
-
-The internet also contains a vast quantity of useful information.  There are blogs, mailing lists, and various websites (e.g., https://stackoverflow.com/) dedicated to providing information about **R**, its packages, and potential error messages that you may encounter (among other things).  The trick is usually determining the key terms to limit your search.  I generally start any web-based search with **"R-Cran"**, which limits and focuses the search.  Using "**R**" as part of your key terms does not, by itself, limit the search.
-
 ## Basic R concepts
 
 There are a few concepts that are important to keep in mind before you start coding. The fact that **R** is a programming language may deter some users who think “I can't program". This should not be the case for two reasons. First, **R** is an interpreted language, not a compiled one, meaning that all commands typed on the keyboard are directly executed without requiring you to build a complete program like in most computer languages (C, Pascal, . . . ). Second, **R**'s syntax is very simple and intuitive. For instance, a linear regression can be done with the command `lm(y ~ x)` which means fitting a linear model with y as the response and x as a predictor.
@@ -288,3 +247,10 @@ min(vector_numbers)
 
 > Can you calculate the square root and then subtract 5 for each element in vector_number?
 
+## Getting Help
+
+One of the most useful commands in **R** is `?`.  At the command prompt (signified by `>` in your Console window), type `?` followed by any command and you will be prompted with a help tab for that command (e.g., `?mean` Fig. 3). You can also search through the help tab directly by searching functions on the search bar. 
+
+![Getting help on R.](FIGURES/IntroToR_Fig3.png)
+
+The internet also contains a vast quantity of useful information.  There are blogs, mailing lists, and various websites (e.g., https://stackoverflow.com/) dedicated to providing information about **R**, its packages, and potential error messages that you may encounter (among other things).  The trick is usually determining the key terms to limit your search.  I generally start any web-based search with **"R-Cran"**, which limits and focuses the search.  Using "**R**" as part of your key terms does not, by itself, limit the search.

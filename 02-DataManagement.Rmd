@@ -1,4 +1,4 @@
-# Introduction to Data Analysis
+# Data Management and Data Manipulation 
 
 Now that you've learned the basics of **R** programming, we'll take things a step further.
 
@@ -10,7 +10,7 @@ You may not be familiar with all the operations you need to execute in this exer
 
 ***
 
-Whenever you start working with a new script, you should first set a working directory. If you are working within a **R-Studio** project, the working directory will automatically be set by default.  This directory will contain all the data for your analysis and will be where you will save all the data outputs. 
+Whenever you start working with a new script, you should first set a working directory. This directory will contain all the data for your analysis and will be where you will save all the data outputs. 
 
 Remember that you can check the current working directory by typing:
 
@@ -18,15 +18,13 @@ Remember that you can check the current working directory by typing:
 getwd()
 ```
 
-Now, let's change the working directory to a location of your choosing. Create a folder if you don't have one already, then make sure your working directory is in that folder. If you already have a folder, just set the working directory to the folder you want to use.
+Now, let's change the working directory to the BL3009 folder you created before class. 
 
 ```{r, eval = F}
-setwd("C:/....")
+setwd("C:/..../BL3309")
 ```
 
-## Data Management and Data Manipulation 
-
-### Exploring the Data
+## Exploring the Data
 
 Load the *China_dataset* csv file I provided you. For this we will use the `read.csv()` funtion. Make sure the data is in your working directory. Note that I have created a folder Data that contains the csv file.
 
@@ -61,7 +59,7 @@ str(data)
 
 Do you note the difference?
 
-### Working with dates
+## Working with dates
 
 When we have dates in our data, we need to tell R that the data should be read as dates and not characters. To do that, we will use the function `as.Date()`. Note that you need to specify how the date is formated. There are multiple conventions, like day-month-year, or month-day-year, etc. In our case, the dates are writen as day, month, and year (e.g., "11-01-2001")
 

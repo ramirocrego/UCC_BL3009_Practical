@@ -37,11 +37,11 @@ knit: (function(input_file, encoding) {
 }
 </style>
 
-## Preface
+# Preface
 
 Learning to use code to manipulate large datasets and conduct data analysis is becoming a critical skill for many professionals in the field of environmental sciences. This practical and tutorial will teach you the basics of using R to conduct data analysis using a long-term dataset of surface water quality and to interpret the results, linking real data to course theory.
 
-### Learning Outcomes
+## Learning Outcomes
 
 You are expected to use your own computer for all exercises. By the end of 
 this practical, you will be able to:
@@ -52,19 +52,64 @@ this practical, you will be able to:
  * Use R to create plots and summirise the data
  * Interpret water quality metrics
 
-### How to use this material
+## How to use this material
 
 Here I present a tutorial that will guide you on the use of different
 R functions. I will walk you though the tutorial during the practical. You can use this tutorial as a starting point to use R for data analysis in the future.
 
 The tutorial is organized in 5 main sections. 
 
-- Section 1 is a basic introduction to R code. 
-- Section 2 is an introduction to the use the R package dplyer to manipulate large datasets. For this, we will use a water quality dataset from China.
-- Section 3 is a quick introduction to the R package ggplot to create nice plots
-- Section 4 is an assignment. You will conduct an analysis on a similar water quality dataset for Ireland.
+- Section 1 is a preface. It shows you the basics of R and R Studio.
+- Section 2 is a basic introduction to R code. 
+- Section 3 is an introduction to the use the R package dplyer to manipulate large datasets. For this, we will use a water quality dataset from China.
+- Section 4 is a quick introduction to the R package ggplot to create nice plots
+- Section 5 is an assignment. You will conduct an analysis on a similar water quality dataset for Ireland.
 
 ---
+
+## What is R and why use R?
+
+**R** is a very powerful statistical programming language that is used broadly by researchers around the world.  **R** is an attractive programming language because it is free, open source, and platform independent.  With all the libraries that are available (and those that are in rapid development), it is quickly becoming a one-stop shop for all your analysis needs.  Most academic statisticians now use **R**, which has allowed for greater sharing of **R** code or packages to implement their recommended methods.  One of the very first things academics often ask when hiring someone is simply, "Can you describe your **R** or statistical programming experience?"  It is now critical to have this background to be competitive for scientific (and many other) positions. 
+
+Among the reasons to use **R** you have:  
+
+1. It's free – open source! If you are a teacher or a student, the benefits are obvious.
+2. It runs on a variety of platforms including Windows, Unix and MacOS.
+3. It provides an unparalleled platform for programming new statistical methods in an easy and straightforward manner.
+4. It contains advanced statistical routines not yet available in other software.
+5. New add-on “packages” are being created and updated constantly.
+6. It has state-of-the-art graphics capabilities.
+
+
+**R** does have a steep learning curve that can often be intimidating to new users, particularly those without prior coding experience.  While this can be very frustrating in the initial stages, learning **R** is like learning a language where proficiency requires practice and continual use of the program.
+
+Our advice is to push yourself to use this tool in everything you do.  At first, **R** will not be the easiest or quickest option.  With persistence, however, you will see the benefit of **R** and continue to find new ways to use it in your work.
+
+## R or RStudio? How to get them?
+
+**R** is available for Linux, MacOS X, and Windows (95 or later) platforms. Software can be downloaded from one of the [Comprehensive R Archive Network](https://cran.r-project.org/) (CRAN) mirror sites. Once installed, **R** will open a console where you run code. You can also work on a script file, where you can write and save your work, and other windows that will show up on demand such as the plot tab (Fig. 1). 
+
+![R console, script and plot tabs.](FIGURES/IntroToR_Fig1.png)
+
+***
+
+**RStudio** is an enterprise-ready professional software tool that integrates with **R**.  It has some nice features beyond the normal **R** interface, which many users feel it is easier to use than **R** (Fig. 2). Once you have installed **R**, you should also download and install [RStudio](https://www.rstudio.com/products/rstudio/download/).  For this course, we will work exclusively in *RStudio*.
+
+
+![RStudio sowfware](FIGURES/IntroToR_Fig2.png)
+
+***
+
+Make sure you have installed R and R Studio. 
+
+The last think you need is the data we will use. To make sure we are all organised, first create a Folder in your computer for this project. Name it BL3003. 
+
+Now, inside this folder, create a new folder called Data.
+
+Download the from this [drive](https://drive.google.com/drive/folders/1m5mXQ0wRhF1TEYcaGRTSy9Fsuuac0SXm?usp=sharing) and paste it inside the Data folder. There are two files, China_dataset.csv and Ireland_dataset.csv.
+
+You are now ready for class :)
+
 
 ```{r child = '01-IntroductionToR.Rmd'}
 ```

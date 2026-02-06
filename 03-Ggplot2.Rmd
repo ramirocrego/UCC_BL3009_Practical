@@ -56,9 +56,10 @@ We can see that as temperature increases, the amount of oxygen dissolved in the 
 
 We can also see a line of dots that give you a hint that something may be wrong with the measures. But for the purpose of this practical, we can ignore that.
 
-### Customizing the plot
+## Customizing the plot
 
-#### Titles and labels
+###Titles and labels
+
 We now have a basic plot. Let's start to customize it. We will first add a title, subtitle, and axis labels with the `labs()` function.
 
 ```{r}
@@ -69,7 +70,7 @@ ggplot(data = data3, aes(x = Temperature..cel., y = Dissolved.Oxygen..mg.l.)) +
        y = "Dissolved oxygen (mg/l)")
 ```
 
-#### Color and size
+### Color and size
 
 We can also change the point color using `col = "red"`. Try other colors, like "blue", or "green".
 
@@ -83,7 +84,7 @@ ggplot(data = data3, aes(x = Temperature..cel., y = Dissolved.Oxygen..mg.l.)) +
 
 Looking pretty good. 
 
-#### Linear trends
+### Linear trends
 
 What if we want to add a line trend?
 
@@ -100,11 +101,11 @@ ggplot(data = data3, aes(x = Temperature..cel., y = Dissolved.Oxygen..mg.l.)) +
 
 We now can clearly see the negative relationship.
 
-### Using Different Geometries
+## Using Different Geometries
 
 Let's try now different geometries.
 
-#### Histogram
+### Histogram
 
 For a histogram we use `geom_histogram()`.
 
@@ -116,7 +117,7 @@ ggplot(data = data3, aes(x = Temperature..cel.)) +
        y = "Count")
 ```
 
-#### Box Plot
+### Box Plot
 
 We use `geom_box()` for a boxplot.
 
@@ -129,9 +130,9 @@ ggplot(data = data3, aes(x = factor(CCME_WQI), y = Nitrogen..mg.l.)) +
        y = "Nitrogen (mg/l)")
 ```
 
-### Customizing the plot appearance
+## Customizing the plot appearance
 
-#### Themes
+### Themes
 
 The `themes` control the overall look of your plot. There are many themes available. For isntance, we can use `theme_minimal()`.
 
@@ -150,7 +151,7 @@ With ggplot2, you have a powerful tool to explore and present your data in compe
 There are many options that you can control on ggplot. The best way to learn all the possibilities is by playing with it. Pretty much, everything can be customized. 
 Feel free to experiment with different datasets and ggplot2 functions to create the visualizations that best communicate your insights!
 
-### Saving Your Plot
+## Saving Your Plot
 
 To save your plot to a file use the function `ggsave()`. Note that first you need to save your plot as an object.
 
@@ -162,7 +163,7 @@ p <- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
 ggsave("scatter_plot.png", plot = p, width = 6, height = 4)
 ```
 
-### A time series plot
+## A time series plot
 
 Finally, we want to explore how different parameters change over time.
 
