@@ -1,0 +1,192 @@
+# Introduction to Data Analysis
+
+Now that you've learned the basics of **R** programming, we'll take things a step further.
+
+We'll be working with a dataset published in the paper by [Karim et al. 2025](https://www.nature.com/articles/s41597-025-04715-4).
+
+This is a a comprehensive surface water quality dataset assembled from a range of regional and global water quality databases, water management organizations, and individual research projects from five countries: USA, Canada, Ireland, England, and China. We will practice now with the Chinese dataset. The goal of this exercise is to test your basic skills in **R** programming, specifically in manipulating data.  
+
+You may not be familiar with all the operations you need to execute in this exercise. Part of the goal with this exercise, however, is for you to become more familiar with the *help* commands in **R** and with the internet solutions that exist.  Our ultimate goal is to make you aware of the tools that are available to you so that you can become an effective problem solver, working independently on data analyses.
+
+***
+
+Whenever you start working with a new script, you should first set a working directory. If you are working within a **R-Studio** project, the working directory will automatically be set by default.  This directory will contain all the data for your analysis and will be where you will save all the data outputs. 
+
+Remember that you can check the current working directory by typing:
+
+```{r}
+getwd()
+```
+
+Now, let's change the working directory to a location of your choosing. Create a folder if you don't have one already, then make sure your working directory is in that folder. If you already have a folder, just set the working directory to the folder you want to use.
+
+```{r, eval = F}
+setwd("C:/....")
+```
+
+## Data Management and Data Manipulation 
+
+### Exploring the Data
+
+Load the *China_dataset* csv file I provided you. For this we will use the `read.csv()` funtion. Make sure the data is in your working directory. Note that I have created a folder Data that contains the csv file.
+
+```{r}
+data <- read.csv("./Data/China_dataset.csv")
+```
+
+View the first 10 lines of the data set.
+
+```{r}
+head(data, 10)
+```
+
+Assess the overall structure of the data set to get a sense of the number and type of variables included. Assure that the data structure of each column of the data frame is correct and/or what you expect it to be. 
+
+```{r}
+str(data)
+```
+Some variables appear as character, but we want them to be factors, that is, chategorical variables with levels. We can tell R to change the data type from character to factor usign the function `as.factor()`:
+
+```{r}
+data$Country <- as.factor(data$Country)
+data$Area <- as.factor(data$Area)
+data$Waterbody.Type <- as.factor(data$Waterbody.Type)
+```
+
+Check again the data structure
+
+```{r}
+str(data)
+```
+
+Do you note the difference?
+
+### Working with dates
+
+When we have dates in our data, we need to tell R that the data should be read as dates and not characters. To do that, we will use the function `as.Date()`. Note that you need to specify how the date is formated. There are multiple conventions, like day-month-year, or month-day-year, etc. In our case, the dates are writen as day, month, and year (e.g., "11-01-2001")
+
+```{r}
+data$Date <- as.Date(data$Date, format = "%d-%M-%Y")
+str(data)
+```
+Note the new Date format. 
+
+***
+
+Now, summarize the data to have a look at all variables.
+
+```{r}
+summary(data)
+```
+
+## Data Table Manipulation with Dplyr
+
+The most basic R skills is to query and manipulate various data tables. Table manipulation is also something that is almost always required, regardless of what you decide to apply R for. For beginners, familiarizing and reinforcing table manipulation skills to meet different needs is a great way of improving R skills. If you wish to become really good at R, but don't know where to start, start with tables! 
+
+The base R functions that come with the default R installation have the capacity for almost all the table manipulation you will need (e.g., `split(), subset(), apply(), sapply(), lapply(), tapply(), aggregate()`). However, sometimes their syntax are less user-friendly and intuitive than some of the special packages built for table manipulation purposes. So, here we are introducing a few of the most useful table manipulation functions within `dplyr` package. This is a package I use a lot.
+
+Note that you will have to use `install.packages()` and `library()` function to download and activate the `dplyr` before using it. 
+
+```{r, eval = T}
+#install.packages("dplyr")
+library(dplyr)
+```
+
+Now, we will see how different functions of this package work.
+
+### `select()` 
+
+We can use `select()` to select column(s) that meet an specific pattern:
+
+```{r}
+head(select(data, pH..ph.units.)) # select column called pH..ph.units.
+```
+
+###  `filter()`  
+
+Filter/select row(s) of data based on specific requirement of column(s) values:
+
+```{r}
+head(filter(data, Temperature..cel. > 20)) # select rows that have a temperature higher than 20 C
+head(filter(data, Temperature..cel. > 25 & pH..ph.units. > 8)) # select rows that have a temperature higher than 20 C and a PH higher than 7
+```
+
+###  pipe operator    
+
+The pipe operator allows you to pipe the output from one function to the input of the next function. Instead of nesting functions (reading from the inside to the outside), the idea of of piping is to read the functions from left to right. It can also help you avoid creating and saving a lot of intermediate variables that you don't need to keep. The old operator for pipes was `%>%`, but now a new version has been introduced, `|>` 
+
+```{r}
+# old operator
+pipe_result<- data %>%
+  select(Temperature..cel.) %>%
+  head()
+head(pipe_result)
+
+# new operator
+pipe_result<- data |>
+  select(Temperature..cel.) |>
+  head()
+head(pipe_result)
+```
+
+### `arrange()` 
+
+This function arranges or re-orders rows based on their value, the rows are arranged by default in ascending order  
+
+```{r}
+order_data1<- data %>% 
+	arrange(Temperature..cel.) 
+head(order_data1)
+
+order_data2<- data %>%
+	arrange(Temperature..cel., pH..ph.units.)
+head(order_data2)
+# Now we learn pipe operator, can you understand what order_data1 and order_data2 are producing? 
+```
+
+> Question: Can you arrange the table first by wt and then by hp in decending order?
+
+###  `mutate()`   
+
+The `mutate()` command creates new column(s) and define their values. For instance, we can create a new column with just the year the data was collected. Here we use the function `format` and specify we want the year with `"%Y"`:
+
+```{r}
+new_col<- data %>%
+	mutate(Year = format(Date, "%Y")) 
+head(new_col)
+```
+
+> Can you create a new column call zero and give it a value of 0 ?
+
+###  `summarise()`   
+
+This function calculates a summary statistics among all rows or rows within certain grouping, often used in combination with `group_by()` 
+
+```{r}
+sum_table <- data %>% 
+summarise(mean(pH..ph.units.))
+sum_table
+
+sum_table2 <- data%>% 
+summarise(avg_PH= mean(pH..ph.units.), min_PH= min(pH..ph.units.), max_PH= max(pH..ph.units.))
+sum_table2
+```
+
+### `group_by()`   
+
+This is a great function. `group_by()` divides data rows into groups based on grouping column(s) provided, often used in combination with other functions which define what you do with them after placing them in groups. When `group_by()` and `summarise()` are used together, you are essentially telling R to separate rows into different groups, and for each groups you use `summarise()` to generate a series of summary statistics that characterize the column values.    
+
+Let's calculate the mean, min and max PH per year:
+
+```{r}
+group_summary <- new_col |>
+  group_by(Year) |>
+  summarise(avg_PH= mean(pH..ph.units.), min_PH= min(pH..ph.units.), max_PH= max(pH..ph.units.))
+group_summary
+```
+
+Very cool right!!??
+
+## Conclusion on data management
+
+This has been a glimpse to what can be done in R to work with tabular data. There are plenty other packages that in time you will learn by searching online and learning from other people, but for now, all the functions we covered are a very good set of tools to do most of what you will need.

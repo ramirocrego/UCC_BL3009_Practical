@@ -1,0 +1,216 @@
+# An introduction to plotting using ggplot2
+
+```{r, echo=F}
+data <- read.csv("./Data/China_dataset.csv")
+```
+
+The package `ggplot2` is widely used for data visualization in R. This package is extremely powerful. I used to like using basic R code for plotting but eventually, I had to admit that ggplot is extremely cool and had to adopt it. 
+
+`ggplot2`is based on the grammar of graphics, which allows users to create complex plots from data in a systematic way.
+
+As with any R package, before you can use ggplot2, you need to install it (if you haven't already) and load it into your R session.
+
+```{r}
+#install.packages("ggplot2")
+library(ggplot2)
+```
+
+## Basic Concepts
+
+There are a few concepts that we need to know to understand how to code ggplots. 
+
+Data: The dataset you want to visualize.
+Aesthetics (aes): The visual properties of the plot (e.g., x and y position, color, size).
+Geometries (geom_): The actual marks we put on the plot (e.g., points, lines, bars). We can, for instance, use geom_line() for plotting lines.
+Facets: Subplots that display subsets of the data.
+Scales: Control how data values are mapped to visual properties.
+Themes: Control the overall appearance of the plot (e.g., font size, background color).
+
+## Creating Your First Plot
+
+Let’s start with a simple scatter plot using the dataset we have been working with. 
+### A basic scatter plot
+
+First, lets filter the data to keep only year 2015. Let's review some data manipulation steps:
+
+```{r}
+# Create data column
+data$Date <- as.Date(data$Date, format = "%d-%M-%Y")
+# Create year column and call the new object data2
+data2<- data %>%
+	mutate(Year = format(Date, "%Y")) 
+# Filter year 2015
+data3 <- data2 |> filter(Year == 2015)
+```
+
+Now, we can create our first plot. Lets plot temperature against dissolved oxigen
+
+```{r}
+ggplot(data = data3, aes(x = Temperature..cel., y = Dissolved.Oxygen..mg.l.)) +
+  geom_point()
+```
+
+In here, `ggplot(data = data3, aes(x = Temperature..cel., y = Dissolved.Oxygen..mg.l.)) ` initializes the plot with the `data3` dataset, setting `Temperature..cel.` on the x-axis and `Dissolved.Oxygen..mg.l.`. `geom_point()` adds points to the plot to create a scatter plot.
+
+We can see that as temperature increases, the amount of oxygen dissolved in the water decreases.
+
+We can also see a line of dots that give you a hint that something may be wrong with the measures. But for the purpose of this practical, we can ignore that.
+
+### Customizing the plot
+
+#### Titles and labels
+We now have a basic plot. Let's start to customize it. We will first add a title, subtitle, and axis labels with the `labs()` function.
+
+```{r}
+ggplot(data = data3, aes(x = Temperature..cel., y = Dissolved.Oxygen..mg.l.)) +
+  geom_point() +
+  labs(title = "Scatter Plot of temp vs diss. oxygen",
+       x = "Temperature (C)",
+       y = "Dissolved oxygen (mg/l)")
+```
+
+#### Color and size
+
+We can also change the point color using `col = "red"`. Try other colors, like "blue", or "green".
+
+```{r}
+ggplot(data = data3, aes(x = Temperature..cel., y = Dissolved.Oxygen..mg.l.)) +
+  geom_point(col = "red") +
+  labs(title = "Scatter Plot of temp vs diss. oxygen",
+       x = "Temperature (C)",
+       y = "Dissolved oxygen (mg/l)")
+```
+
+Looking pretty good. 
+
+#### Linear trends
+
+What if we want to add a line trend?
+
+We can use the `geom_smooth()` function to add a linear trend. Method refers to the moothing method (function). Here we use a linear model. se controls whether you plot the standard error. And color controls the color of the line.
+
+```{r}
+ggplot(data = data3, aes(x = Temperature..cel., y = Dissolved.Oxygen..mg.l.)) +
+  geom_point(col = "red") +
+  labs(title = "Scatter Plot of temp vs diss. oxygen",
+       x = "Temperature (C)",
+       y = "Dissolved oxygen (mg/l)") +
+  geom_smooth(method = "lm", se = T, color = "blue")
+```
+
+We now can clearly see the negative relationship.
+
+### Using Different Geometries
+
+Let's try now different geometries.
+
+#### Histogram
+
+For a histogram we use `geom_histogram()`.
+
+```{r}
+ggplot(data = data3, aes(x = Temperature..cel.)) +
+  geom_histogram(binwidth = 2, fill = "blue", color = "black") +
+  labs(title = "Histogram of water temperature",
+       x = "Temperature (C)",
+       y = "Count")
+```
+
+#### Box Plot
+
+We use `geom_box()` for a boxplot.
+
+This can be useful to visualize the distribution of a variable across a different categories. For instance, we can look at the concentration of nitrogen across different water quality indexes:
+
+```{r}
+ggplot(data = data3, aes(x = factor(CCME_WQI), y = Nitrogen..mg.l.)) +
+  geom_boxplot() +
+  labs(x = "Water Quality Index",
+       y = "Nitrogen (mg/l)")
+```
+
+### Customizing the plot appearance
+
+#### Themes
+
+The `themes` control the overall look of your plot. There are many themes available. For isntance, we can use `theme_minimal()`.
+
+```{r}
+ggplot(data = data3, aes(x = factor(CCME_WQI), y = Nitrogen..mg.l.)) +
+  geom_boxplot() +
+  labs(x = "Water Quality Index",
+       y = "Nitrogen (mg/l)") +
+  theme_minimal()
+```
+
+Other available themes include `theme_gray()`, `theme_classic()`, `theme_bw()`, and more. Check them out yourself.
+
+With ggplot2, you have a powerful tool to explore and present your data in compelling ways.
+
+There are many options that you can control on ggplot. The best way to learn all the possibilities is by playing with it. Pretty much, everything can be customized. 
+Feel free to experiment with different datasets and ggplot2 functions to create the visualizations that best communicate your insights!
+
+### Saving Your Plot
+
+To save your plot to a file use the function `ggsave()`. Note that first you need to save your plot as an object.
+
+```{r, eval=FALSE}
+p <- ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(title = "Scatter Plot of MPG vs Weight")
+
+ggsave("scatter_plot.png", plot = p, width = 6, height = 4)
+```
+
+### A time series plot
+
+Finally, we want to explore how different parameters change over time.
+
+For this, we need to combine everything we learned to first create the variables we need and then plot them. A full analysis.
+
+First, lets look at the `data2` dataframe we created by using the `summary()` funtion:
+
+```{r}
+summary(data2)
+```
+Notice that there are many dates missing in the dataset. That will create problems, so we need to get rid of those rows. For that, we can use the function `filter()` and keep just data without missing dates using `complete.cases(Date)`:
+
+```{r}
+nrow(data2)
+data2 <- data2 |> filter(complete.cases(Date))
+nrow(data2)
+```
+
+Note, we have removed the 500 rows with NAs.
+
+Now, we can create a new dataframe with the average value per year across all years:
+
+```{r}
+China <- data2 |>
+	mutate(Year = format(Date, "%Y")) |>
+  group_by(Year) %>%
+  summarise(
+    Ammonia = mean(Ammonia..mg.l., na.rm = TRUE),             
+    Dissolved.Oxygen = mean(Dissolved.Oxygen..mg.l., na.rm = TRUE),         
+    pH = mean(pH..ph.units., na.rm = TRUE),
+    Temperature = mean(Temperature..cel., na.rm = TRUE),             
+    Nitrogen = mean(Nitrogen..mg.l., na.rm = TRUE),
+    Nitrate = mean(Nitrate..mg.l., na.rm = TRUE),
+    .groups = "drop"
+  )
+
+China$Year <- as.Date(strptime(China$Year, "%Y")) # Convert year back to date format
+```
+
+Finally, we can create time series to see how these parameters have changed across years:
+
+```{r}
+ggplot(China, aes(x=Year, y = Ammonia)) + geom_point() + geom_line(aes(group = "1")) + geom_smooth(method = "gam", se = T, color = "blue")
+ggplot(China, aes(x=Year, y = Dissolved.Oxygen)) + geom_point() + geom_line(aes(group = "1")) + geom_smooth(method = "gam", se = T, color = "blue")
+ggplot(China, aes(x=Year, y = pH)) + geom_point() + geom_line(aes(group = "1")) + geom_smooth(method = "gam", se = T, color = "blue")
+ggplot(China, aes(x=Year, y = Temperature)) + geom_point() + geom_line(aes(group = "1")) + geom_smooth(method = "gam", se = T, color = "blue")
+ggplot(China, aes(x=Year, y = Nitrogen)) + geom_point() + geom_line(aes(group = "1")) + geom_smooth(method = "gam", se = T, color = "blue")
+ggplot(China, aes(x=Year, y = Nitrate)) + geom_point() + geom_line(aes(group = "1")) + geom_smooth(method = "gam", se = T, color = "blue")
+```
+
+

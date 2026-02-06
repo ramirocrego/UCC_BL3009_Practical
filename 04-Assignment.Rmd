@@ -1,0 +1,74 @@
+# Assignment
+
+This assignment is intended to practice the skills you have learned so far. 
+
+I want you to analyse the trend in different fresh water parameters but this time for a water system in Ireland.
+
+What you need to do is:
+
+1. Start a new R script.
+
+2. Load the dataset: "Ireland_dataset.csv"
+
+```{r}
+Ireland <- read.csv("./Data/Ireland_dataset.csv")
+```
+
+3. Filter the water Area. Check this table and use the area name based on your group number:
+
+```{r, echo=FALSE}
+names <- c(
+  "Corrib, Aille",
+  "Corrib, Ballyquirke",
+  "Corrib, Carra",
+  "Corrib, Bofin GY",
+  "Corrib, Corrib Lower",
+  "Lough Neagh _ Lower Bann, Emy",
+  "Foyle, Derg DL",
+  "Foyle, Finn DL",
+  "Foyle, Mourne DL",
+  "Newry, Fane, Glyde and Dee, Brackan",
+  "Newry, Fane, Glyde and Dee, Monalty",
+  "Newry, Fane, Glyde and Dee, Muckno",
+  "Newry, Fane, Glyde and Dee, Naglack",
+  "Newry, Fane, Glyde and Dee, Spring",
+  "Mal Bay, Doo CE",
+  "Mal Bay, Keagh",
+  "Mal Bay, Lickeen",
+  "Mal Bay, Naminna",
+  "Lough Swilly, Akibbon",
+  "Lough Swilly, Fern",
+  "Lough Swilly, Gartan",
+  "Tralee Bay-Feale, Cam KY",
+  "Tralee Bay-Feale, Gill KY",
+  "Lee, Cork Harbour and Youghal Bay, Allua",
+  "Lower Shannon (C), Graney"
+)
+
+table_df <- data.frame(
+  `Group Number` = 1:25,
+  `Area Name` = names
+)
+
+knitr::kable(table_df)
+```
+
+Hint 1: You need to load the `dpylr` package. 
+Hint 2: Make sure the variable Area is in the correct structure, factor. 
+
+4. Similar to the China example, calculate the average value of ammonia, dissolved oxygen, PH, temperature, and nitrogen per year.
+
+Hint: You need to load the `ggplot2` package. 
+
+5. For each variable, create a time series plot showing the trend.
+
+Hint: Adapt the code we used for the time series plot using the data from China.
+For more points: Customize your plots, using different colors. Make sure your variables are properly named.
+
+6. In a Word document, paste your entire R code and all your plots. 
+
+Good codes are those easily legible, well organised and well annotated. You will get marks accordingly.
+
+7. Write a short paragraph interpreting the parameter trends in the figures, including a potential explanation for the trends you observe. 
+
+8. Submit on Canvas (Do not forget to write the names of all participants)

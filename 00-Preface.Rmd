@@ -1,0 +1,79 @@
+---
+title: "BL3009: Global Agricultural Impacts on the Environment - Practical 1"
+author: "Ramiro D Crego - Lecturer in Zoology/Animal Ecology, School of Biological, Earth & Environmental Sciences - Environmental Research Institute, University College Cork, Ireland. Email: rcrego@ucc.ie"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+always_allow_html: true
+output:
+  html_document:
+    theme: journal
+    toc: yes
+    toc_depth: 3
+    geometry: margin=3cm
+    toc_float: 
+      collapsed: true
+      smooth_scroll: true
+    number_sections: true
+knit: (function(input_file, encoding) {
+  out_dir <- 'docs';
+  rmarkdown::render(input_file,
+ encoding=encoding,
+ output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
+---
+
+<a href="" 
+   class="personal-logo-corner" 
+   aria-label="Visit my site">
+  <img src="https://storage-prtl-co.imgix.net/endor/organisations/219/logos/1757503594_ucc-master-logo-2025.png" 
+       alt="My Logo" 
+       style="width:70px; height:50px; position:fixed; top:30px; right:20px; border:0; z-index:1000;">
+</a>
+
+<style>
+.personal-logo-corner img {
+  transition: transform 0.3s ease;
+}
+.personal-logo-corner img:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+</style>
+
+## Preface
+
+Learning to use code to manipulate large datasets and conduct data analysis is becoming a critical skill for many professionals in the field of environmental sciences. This practical and tutorial will teach you the basics of using R to conduct data analysis using a long-term dataset of surface water quality and to interpret the results, linking real data to course theory.
+
+### Learning Outcomes
+
+You are expected to use your own computer for all exercises. By the end of 
+this practical, you will be able to:
+
+ * Understand R and R Studio interface
+ * Understand the fundamentals of R code
+ * Perform basic data analysis using a long-term dataset of surface water quality
+ * Use R to create plots and summirise the data
+ * Interpret water quality metrics
+
+### How to use this material
+
+Here I present a tutorial that will guide you on the use of different
+R functions. I will walk you though the tutorial during the practical. You can use this tutorial as a starting point to use R for data analysis in the future.
+
+The tutorial is organized in 5 main sections. 
+
+- Section 1 is a basic introduction to R code. 
+- Section 2 is an introduction to the use the R package dplyer to manipulate large datasets. For this, we will use a water quality dataset from China.
+- Section 3 is a quick introduction to the R package ggplot to create nice plots
+- Section 4 is an assignment. You will conduct an analysis on a similar water quality dataset for Ireland.
+
+---
+
+```{r child = '01-IntroductionToR.Rmd'}
+```
+
+```{r child = '02-DataManagement.Rmd'}
+```
+
+```{r child = '03-Ggplot2.Rmd'}
+```
+
+```{r child = '04-Assignment.Rmd'}
+```
