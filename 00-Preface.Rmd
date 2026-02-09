@@ -61,8 +61,8 @@ The tutorial is organized in 5 main sections.
 
 - Section 1 is a preface. It shows you the basics of R and R Studio.
 - Section 2 is a basic introduction to R code. 
-- Section 3 is an introduction to the use the R package dplyer to manipulate large datasets. For this, we will use a water quality dataset from China.
-- Section 4 is a quick introduction to the R package ggplot to create nice plots
+- Section 3 is an introduction to the use the R package dplyer to manage large datasets. For this, we will use a water quality dataset from China.
+- Section 4 is a quick introduction to the R package ggplot to create nice plots.
 - Section 5 is an assignment. You will conduct an analysis on a similar water quality dataset for Ireland.
 
 ---

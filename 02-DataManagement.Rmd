@@ -21,7 +21,7 @@ getwd()
 Now, let's change the working directory to the BL3009 folder you created before class. 
 
 ```{r, eval = F}
-setwd("C:/..../BL3309")
+setwd("C:/..../BL3009")
 ```
 
 ## Exploring the Data
